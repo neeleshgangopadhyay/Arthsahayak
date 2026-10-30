@@ -1,0 +1,1019 @@
+{
+ "dense": {
+  "strategy": "section",
+  "mode": "dense",
+  "overall_hit_rate@5": 0.565,
+  "by_type": {
+   "lookup": 0.636,
+   "multi-hop": 0.6,
+   "exact-number": 0.429
+  },
+  "counts_by_type": {
+   "lookup": "7/11",
+   "multi-hop": "3/5",
+   "exact-number": "3/7"
+  },
+  "details": [
+   {
+    "id": "q01",
+    "type": "lookup",
+    "question": "What is the repo rate according to the RBI's 2025-26 Annual Report?",
+    "expected": "2025 2026 Rbi Annual Report p.30",
+    "hit": false,
+    "retrieved": [
+     "Indain Economy Survey 2025 2026 p.138",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.345",
+     "2025 2026 Rbi Annual Report p.221",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.348",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.346"
+    ]
+   },
+   {
+    "id": "q02",
+    "type": "multi-hop",
+    "question": "What caused food inflation to moderate in 2025-26 according to the Economic Survey?",
+    "expected": "Indain Economy Survey 2025 2026 p.[254, 261, 263]",
+    "hit": true,
+    "retrieved": [
+     "Economic Survey 2024 2025 p.163",
+     "Indain Economy Survey 2025 2026 p.261",
+     "Indain Economy Survey 2025 2026 p.254",
+     "2025 2026 Rbi Annual Report p.56",
+     "Economic Survey 2024 2025 p.70"
+    ]
+   },
+   {
+    "id": "q03",
+    "type": "exact-number",
+    "question": "By how many basis points did the Monetary Policy Committee cut the policy repo rate as mentioned in the RBI Annual Report 2025-26?",
+    "expected": "2025 2026 Rbi Annual Report p.30",
+    "hit": false,
+    "retrieved": [
+     "Indain Economy Survey 2025 2026 p.138",
+     "2025 2026 Rbi Annual Report p.85",
+     "2025 2026 Rbi Annual Report p.224",
+     "Indain Economy Survey 2025 2026 p.140",
+     "Economic Survey 2024 2025 p.81"
+    ]
+   },
+   {
+    "id": "q04",
+    "type": "lookup",
+    "question": "What is a measure of central tendency?",
+    "expected": "Statistics For Indian Economy Ch5 p.1",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch5 p.1",
+     "Statistics For Indian Economy Ch5 p.14",
+     "Statistics For Indian Economy Ch5 p.13",
+     "Statistics For Indian Economics Ch8 p.3",
+     "Statistics For Indian Economy Ch5 p.2"
+    ]
+   },
+   {
+    "id": "q05",
+    "type": "multi-hop",
+    "question": "How did liquidity conditions in the banking system change between Q2 and Q3 of 2025-26, and what actions did the RBI take in response?",
+    "expected": "2025 2026 Rbi Annual Report p.66",
+    "hit": false,
+    "retrieved": [
+     "2025 2026 Rbi Annual Report p.85",
+     "Indain Economy Survey 2025 2026 p.138",
+     "Economic Survey 2024 2025 p.121",
+     "2025 2026 Rbi Annual Report p.225",
+     "2025 2026 Rbi Annual Report p.91"
+    ]
+   },
+   {
+    "id": "q07",
+    "type": "exact-number",
+    "question": "In the discrete series median example with N=20 observations, which observation determines the median's position?",
+    "expected": "Statistics For Indian Economy Ch5 p.9",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch5 p.8",
+     "Statistics For Indian Economy Ch5 p.8",
+     "Statistics For Indian Economy Ch5 p.9",
+     "Statistics For Indian Economy Ch5 p.13",
+     "Statistics For Indian Economy Ch5 p.14"
+    ]
+   },
+   {
+    "id": "q08",
+    "type": "lookup",
+    "question": "Give an example of a data series that has no mode, as discussed in the statistics chapter on central tendency.",
+    "expected": "Statistics For Indian Economy Ch5 p.11",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch5 p.11",
+     "Statistics For Indian Economy Ch5 p.11",
+     "Statistics For Indian Economy Ch6 p.7",
+     "Statistics For Indian Economy Ch5 p.12",
+     "Statistics For Indian Economy Ch5 p.1"
+    ]
+   },
+   {
+    "id": "q09",
+    "type": "multi-hop",
+    "question": "Why is the correlation between the arrival of migratory birds and birth rates in a locality not considered a cause-and-effect relationship?",
+    "expected": "Statistics For Indian Economy Ch6 p.2",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch6 p.2",
+     "Indain Economy Survey 2025 2026 p.430",
+     "Indian Economy Class11 Unit 3 p.5",
+     "Statistics For Indian Economy Ch6 p.2",
+     "Indain Economy Survey 2025 2026 p.604"
+    ]
+   },
+   {
+    "id": "q10",
+    "type": "lookup",
+    "question": "What does an upward-rising scatter of points between two variables indicate about their relationship?",
+    "expected": "Statistics For Indian Economy Ch6 p.4",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch6 p.4",
+     "Microececonomy Chapter 2 p.15",
+     "Statistics For Indian Economy Ch6 p.2",
+     "Statistics For Indian Economy Ch6 p.3",
+     "Statistics For Indian Economy Ch6 p.3"
+    ]
+   },
+   {
+    "id": "q11",
+    "type": "multi-hop",
+    "question": "Which correlation measure should be used when dealing with qualitative attributes such as fairness, honesty, or beauty, rather than numerically measurable variables?",
+    "expected": "Statistics For Indian Economy Ch6 p.11",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch6 p.11",
+     "Statistics For Indian Economy Ch6 p.14",
+     "Statistics For Indian Economy Ch6 p.15",
+     "Statistics For Indian Economy Ch6 p.3",
+     "Statistics For Indian Economy Ch6 p.12"
+    ]
+   },
+   {
+    "id": "q12",
+    "type": "lookup",
+    "question": "What is the formula used to locate the median's position in a discrete series?",
+    "expected": "Statistics For Indian Economy Ch5 p.9",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch5 p.8",
+     "Statistics For Indian Economy Ch5 p.9",
+     "Statistics For Indian Economy Ch5 p.8",
+     "Statistics For Indian Economy Ch5 p.15",
+     "Statistics For Indian Economy Ch5 p.10"
+    ]
+   },
+   {
+    "id": "q13",
+    "type": "exact-number",
+    "question": "Which expenditure item received the highest allocation in the Union Budget 2026-27, according to the Key Features of Budget document?",
+    "expected": "Key Features Of Budget 2026 2027 p.21",
+    "hit": false,
+    "retrieved": [
+     "2025 2026 Rbi Annual Report p.35",
+     "2025 2026 Rbi Annual Report p.75",
+     "Key To Budget Document 2026 p.2",
+     "Economic Survey 2024 2025 p.66",
+     "2025 2026 Rbi Annual Report p.77"
+    ]
+   },
+   {
+    "id": "q14",
+    "type": "exact-number",
+    "question": "What was the Defence allocation in the Union Budget 2026-27 expenditure breakdown?",
+    "expected": "Key Features Of Budget 2026 2027 p.21",
+    "hit": false,
+    "retrieved": [
+     "Economic Survey 2024 2025 p.66",
+     "2025 2026 Rbi Annual Report p.77",
+     "Key To Budget Document 2026 p.5",
+     "Indain Economy Survey 2025 2026 p.113",
+     "Economic Survey Complete 2023 2024 p.68"
+    ]
+   },
+   {
+    "id": "q15",
+    "type": "exact-number",
+    "question": "In the two-firm GDP example in the macroeconomics chapter on national income, what is the computed GDP when Value Added by Firm A is 50 and Value Added by Firm B is 150?",
+    "expected": "Macroeconomics Ch2 p.15",
+    "hit": true,
+    "retrieved": [
+     "Macroeconomics Ch2 p.15",
+     "Macroeconomics Ch2 p.15",
+     "Macroeconomics Ch2 p.12",
+     "Macroeconomics Ch2 p.9",
+     "Macroeconomics Ch2 p.9"
+    ]
+   },
+   {
+    "id": "q16",
+    "type": "lookup",
+    "question": "How is net investment calculated, according to the macroeconomics chapter on national income?",
+    "expected": "Macroeconomics Ch2 p.4",
+    "hit": true,
+    "retrieved": [
+     "Macroeconomics Ch 4 p.1",
+     "Macroeconomics Ch2 p.4",
+     "Economic Survey 2024 2025 p.153",
+     "Macroeconomics Ch2 p.24",
+     "Macroeconomics Ch2 p.1"
+    ]
+   },
+   {
+    "id": "q17",
+    "type": "multi-hop",
+    "question": "Which Indian state has a better human development ranking than Haryana despite having a lower per capita income, according to the development economics chapter?",
+    "expected": "Basic Economy Ch1 p.15",
+    "hit": false,
+    "retrieved": [
+     "Basic Economy Ch1 p.9",
+     "Basic Economy Ch1 p.12",
+     "Basic Economy Ch1 p.11",
+     "Basic Economy Ch1 p.10",
+     "Basic Economy Ch1 p.9"
+    ]
+   },
+   {
+    "id": "q18",
+    "type": "lookup",
+    "question": "Why is per capita income calculated in a dollar-adjusted way for comparison across countries?",
+    "expected": "Basic Economy Ch1 p.12",
+    "hit": false,
+    "retrieved": [
+     "Basic Economy Ch1 p.7",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.50",
+     "Macroeconomics Ch2 p.24",
+     "Basic Economy Ch1 p.9",
+     "Basic Economy Ch1 p.8"
+    ]
+   },
+   {
+    "id": "q19",
+    "type": "exact-number",
+    "question": "During the colonial period, roughly what percentage of India's workforce was engaged in agriculture, according to the Indian Economy Class 11 chapter on the pre-independence economy?",
+    "expected": "Indian Economy Class11 Ch1 p.11",
+    "hit": false,
+    "retrieved": [
+     "Indian Economy Class11 Ch1 p.5",
+     "Indian Economy Class11 Ch1 p.14",
+     "Indian Economy Class11 Ch1 p.13",
+     "Economic Survey Complete 2023 2024 p.321",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.79"
+    ]
+   },
+   {
+    "id": "q20",
+    "type": "lookup",
+    "question": "Which two industries marked the beginning of modern industry in India during the colonial period?",
+    "expected": "Indian Economy Class11 Ch1 p.7",
+    "hit": true,
+    "retrieved": [
+     "Indian Economy Class11 Ch1 p.7",
+     "Indian Economy Class11 Ch1 p.8",
+     "Indian Economy Class11 Ch1 p.4",
+     "Indian Economy Class11 Ch1 p.7",
+     "Indian Economy Class11 Ch1 p.13"
+    ]
+   },
+   {
+    "id": "q21",
+    "type": "lookup",
+    "question": "Who defined economics as 'the study of man in the ordinary business of life'?",
+    "expected": "Statistics For Indian Economics Ch1 p.1",
+    "hit": false,
+    "retrieved": [
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.34",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.37",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.38",
+     "Macroeconomics Ch 1 p.3",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.35"
+    ]
+   },
+   {
+    "id": "q22",
+    "type": "lookup",
+    "question": "What are measures that help solve an economic problem called, in economics terminology?",
+    "expected": "Statistics For Indian Economics Ch1 p.4",
+    "hit": false,
+    "retrieved": [
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.37",
+     "Microeconomy Ch1 p.6",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.35",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.57",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.36"
+    ]
+   },
+   {
+    "id": "q23",
+    "type": "exact-number",
+    "question": "What is the size of India's technical textiles market in FY24, according to the Economic Survey 2024-25?",
+    "expected": "Economic Survey 2024 2025 p.246",
+    "hit": true,
+    "retrieved": [
+     "Economic Survey 2024 2025 p.246",
+     "Indain Economy Survey 2025 2026 p.361",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.32",
+     "Economic Survey Complete 2023 2024 p.405",
+     "Economic Survey Complete 2023 2024 p.163"
+    ]
+   },
+   {
+    "id": "q24",
+    "type": "lookup",
+    "question": "Where does India rank globally in the technical textiles industry, according to the Economic Survey 2024-25?",
+    "expected": "Economic Survey 2024 2025 p.246",
+    "hit": true,
+    "retrieved": [
+     "Economic Survey 2024 2025 p.246",
+     "Economic Survey 2024 2025 p.245",
+     "Economic Survey 2024 2025 p.139",
+     "Indain Economy Survey 2025 2026 p.361",
+     "Economic Survey Complete 2023 2024 p.405"
+    ]
+   }
+  ]
+ },
+ "hybrid": {
+  "strategy": "section",
+  "mode": "hybrid",
+  "overall_hit_rate@5": 0.696,
+  "by_type": {
+   "lookup": 0.909,
+   "multi-hop": 0.6,
+   "exact-number": 0.429
+  },
+  "counts_by_type": {
+   "lookup": "10/11",
+   "multi-hop": "3/5",
+   "exact-number": "3/7"
+  },
+  "details": [
+   {
+    "id": "q01",
+    "type": "lookup",
+    "question": "What is the repo rate according to the RBI's 2025-26 Annual Report?",
+    "expected": "2025 2026 Rbi Annual Report p.30",
+    "hit": false,
+    "retrieved": [
+     "Indain Economy Survey 2025 2026 p.138",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.348",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.346",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.345",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.346"
+    ]
+   },
+   {
+    "id": "q02",
+    "type": "multi-hop",
+    "question": "What caused food inflation to moderate in 2025-26 according to the Economic Survey?",
+    "expected": "Indain Economy Survey 2025 2026 p.[254, 261, 263]",
+    "hit": false,
+    "retrieved": [
+     "2025 2026 Rbi Annual Report p.56",
+     "2025 2026 Rbi Annual Report p.86",
+     "Economic Survey Complete 2023 2024 p.134",
+     "Indain Economy Survey 2025 2026 p.273",
+     "2025 2026 Rbi Annual Report p.86"
+    ]
+   },
+   {
+    "id": "q03",
+    "type": "exact-number",
+    "question": "By how many basis points did the Monetary Policy Committee cut the policy repo rate as mentioned in the RBI Annual Report 2025-26?",
+    "expected": "2025 2026 Rbi Annual Report p.30",
+    "hit": false,
+    "retrieved": [
+     "Indain Economy Survey 2025 2026 p.138",
+     "2025 2026 Rbi Annual Report p.85",
+     "Indain Economy Survey 2025 2026 p.140",
+     "Indain Economy Survey 2025 2026 p.141",
+     "2025 2026 Rbi Annual Report p.224"
+    ]
+   },
+   {
+    "id": "q04",
+    "type": "lookup",
+    "question": "What is a measure of central tendency?",
+    "expected": "Statistics For Indian Economy Ch5 p.1",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch5 p.14",
+     "Statistics For Indian Economy Ch5 p.1",
+     "Statistics For Indian Economy Ch5 p.2",
+     "Statistics For Indian Economy Ch5 p.13",
+     "Statistics For Indian Economy Ch5 p.10"
+    ]
+   },
+   {
+    "id": "q05",
+    "type": "multi-hop",
+    "question": "How did liquidity conditions in the banking system change between Q2 and Q3 of 2025-26, and what actions did the RBI take in response?",
+    "expected": "2025 2026 Rbi Annual Report p.66",
+    "hit": false,
+    "retrieved": [
+     "Indain Economy Survey 2025 2026 p.138",
+     "2025 2026 Rbi Annual Report p.93",
+     "2025 2026 Rbi Annual Report p.91",
+     "Economic Survey Complete 2023 2024 p.88",
+     "Economic Survey Complete 2023 2024 p.88"
+    ]
+   },
+   {
+    "id": "q07",
+    "type": "exact-number",
+    "question": "In the discrete series median example with N=20 observations, which observation determines the median's position?",
+    "expected": "Statistics For Indian Economy Ch5 p.9",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch5 p.8",
+     "Statistics For Indian Economy Ch5 p.8",
+     "Statistics For Indian Economy Ch5 p.9",
+     "Statistics For Indian Economy Ch5 p.14",
+     "Statistics For Indian Economy Ch5 p.10"
+    ]
+   },
+   {
+    "id": "q08",
+    "type": "lookup",
+    "question": "Give an example of a data series that has no mode, as discussed in the statistics chapter on central tendency.",
+    "expected": "Statistics For Indian Economy Ch5 p.11",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch5 p.11",
+     "Statistics For Indian Economy Ch5 p.1",
+     "Statistics For Indian Economy Ch5 p.11",
+     "Statistics For Indian Economy Ch5 p.13",
+     "Statistics For Indian Economy Ch5 p.12"
+    ]
+   },
+   {
+    "id": "q09",
+    "type": "multi-hop",
+    "question": "Why is the correlation between the arrival of migratory birds and birth rates in a locality not considered a cause-and-effect relationship?",
+    "expected": "Statistics For Indian Economy Ch6 p.2",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch6 p.2",
+     "Economic Survey 2024 2025 p.299",
+     "Indain Economy Survey 2025 2026 p.430",
+     "Statistics For Indian Economy Ch6 p.2",
+     "Indian Economy Class11 Unit 3 p.5"
+    ]
+   },
+   {
+    "id": "q10",
+    "type": "lookup",
+    "question": "What does an upward-rising scatter of points between two variables indicate about their relationship?",
+    "expected": "Statistics For Indian Economy Ch6 p.4",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch6 p.4",
+     "Statistics For Indian Economy Ch6 p.3",
+     "Statistics For Indian Economy Ch6 p.14",
+     "Statistics For Indian Economy Ch6 p.2",
+     "Statistics For Indian Economy Ch6 p.3"
+    ]
+   },
+   {
+    "id": "q11",
+    "type": "multi-hop",
+    "question": "Which correlation measure should be used when dealing with qualitative attributes such as fairness, honesty, or beauty, rather than numerically measurable variables?",
+    "expected": "Statistics For Indian Economy Ch6 p.11",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch6 p.11",
+     "Statistics For Indian Economy Ch6 p.14",
+     "Statistics For Indian Economy Ch6 p.3",
+     "Statistics For Indian Economy Ch6 p.3",
+     "Statistics For Indian Economy Ch6 p.15"
+    ]
+   },
+   {
+    "id": "q12",
+    "type": "lookup",
+    "question": "What is the formula used to locate the median's position in a discrete series?",
+    "expected": "Statistics For Indian Economy Ch5 p.9",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch5 p.8",
+     "Statistics For Indian Economy Ch5 p.9",
+     "Statistics For Indian Economy Ch5 p.8",
+     "Statistics For Indian Economy Ch5 p.10",
+     "Statistics For Indian Economy Ch5 p.15"
+    ]
+   },
+   {
+    "id": "q13",
+    "type": "exact-number",
+    "question": "Which expenditure item received the highest allocation in the Union Budget 2026-27, according to the Key Features of Budget document?",
+    "expected": "Key Features Of Budget 2026 2027 p.21",
+    "hit": false,
+    "retrieved": [
+     "Key To Budget Document 2026 p.2",
+     "2025 2026 Rbi Annual Report p.75",
+     "Key To Budget Document 2026 p.9",
+     "Key To Budget Document 2026 p.5",
+     "Indain Economy Survey 2025 2026 p.106"
+    ]
+   },
+   {
+    "id": "q14",
+    "type": "exact-number",
+    "question": "What was the Defence allocation in the Union Budget 2026-27 expenditure breakdown?",
+    "expected": "Key Features Of Budget 2026 2027 p.21",
+    "hit": false,
+    "retrieved": [
+     "Economic Survey 2024 2025 p.66",
+     "2025 2026 Rbi Annual Report p.77",
+     "2025 2026 Rbi Annual Report p.242",
+     "Indain Economy Survey 2025 2026 p.106",
+     "2025 2026 Rbi Annual Report p.72"
+    ]
+   },
+   {
+    "id": "q15",
+    "type": "exact-number",
+    "question": "In the two-firm GDP example in the macroeconomics chapter on national income, what is the computed GDP when Value Added by Firm A is 50 and Value Added by Firm B is 150?",
+    "expected": "Macroeconomics Ch2 p.15",
+    "hit": true,
+    "retrieved": [
+     "Macroeconomics Ch2 p.15",
+     "Macroeconomics Ch2 p.15",
+     "Macroeconomics Ch2 p.9",
+     "Macroeconomics Ch2 p.12",
+     "Macroeconomics Ch2 p.12"
+    ]
+   },
+   {
+    "id": "q16",
+    "type": "lookup",
+    "question": "How is net investment calculated, according to the macroeconomics chapter on national income?",
+    "expected": "Macroeconomics Ch2 p.4",
+    "hit": true,
+    "retrieved": [
+     "Macroeconomics Ch 4 p.1",
+     "Macroeconomics Ch2 p.1",
+     "Macroeconomics Ch2 p.24",
+     "Macroeconomics Ch2 p.25",
+     "Macroeconomics Ch2 p.4"
+    ]
+   },
+   {
+    "id": "q17",
+    "type": "multi-hop",
+    "question": "Which Indian state has a better human development ranking than Haryana despite having a lower per capita income, according to the development economics chapter?",
+    "expected": "Basic Economy Ch1 p.15",
+    "hit": true,
+    "retrieved": [
+     "Basic Economy Ch1 p.9",
+     "Basic Economy Ch1 p.12",
+     "Basic Economy Ch1 p.9",
+     "Basic Economy Ch1 p.15",
+     "Basic Economy Ch1 p.15"
+    ]
+   },
+   {
+    "id": "q18",
+    "type": "lookup",
+    "question": "Why is per capita income calculated in a dollar-adjusted way for comparison across countries?",
+    "expected": "Basic Economy Ch1 p.12",
+    "hit": true,
+    "retrieved": [
+     "Basic Economy Ch1 p.7",
+     "Basic Economy Ch1 p.8",
+     "Macroeconomics Ch2 p.21",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.70",
+     "Basic Economy Ch1 p.12"
+    ]
+   },
+   {
+    "id": "q19",
+    "type": "exact-number",
+    "question": "During the colonial period, roughly what percentage of India's workforce was engaged in agriculture, according to the Indian Economy Class 11 chapter on the pre-independence economy?",
+    "expected": "Indian Economy Class11 Ch1 p.11",
+    "hit": false,
+    "retrieved": [
+     "Indian Economy Class11 Ch1 p.14",
+     "Indian Economy Class11 Ch1 p.13",
+     "Indian Economy Class11 Ch1 p.14",
+     "Indian Economy Class11 Ch1 p.5",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.79"
+    ]
+   },
+   {
+    "id": "q20",
+    "type": "lookup",
+    "question": "Which two industries marked the beginning of modern industry in India during the colonial period?",
+    "expected": "Indian Economy Class11 Ch1 p.7",
+    "hit": true,
+    "retrieved": [
+     "Indian Economy Class11 Ch1 p.7",
+     "Indian Economy Class11 Ch1 p.7",
+     "Indian Economy Class11 Ch1 p.14",
+     "Indian Economy Class11 Ch1 p.8",
+     "Indian Economy Class11 Ch1 p.5"
+    ]
+   },
+   {
+    "id": "q21",
+    "type": "lookup",
+    "question": "Who defined economics as 'the study of man in the ordinary business of life'?",
+    "expected": "Statistics For Indian Economics Ch1 p.1",
+    "hit": true,
+    "retrieved": [
+     "Macroeconomics Ch 1 p.5",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.37",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.34",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.35",
+     "Statistics For Indian Economics Ch1 p.1"
+    ]
+   },
+   {
+    "id": "q22",
+    "type": "lookup",
+    "question": "What are measures that help solve an economic problem called, in economics terminology?",
+    "expected": "Statistics For Indian Economics Ch1 p.4",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economics Ch1 p.4",
+     "Microeconomy Ch1 p.6",
+     "Statistics For Indian Economics Ch1 p.5",
+     "Statistics For Indian Economics Ch1 p.4",
+     "Statistics For Indian Economics Ch1 p.7"
+    ]
+   },
+   {
+    "id": "q23",
+    "type": "exact-number",
+    "question": "What is the size of India's technical textiles market in FY24, according to the Economic Survey 2024-25?",
+    "expected": "Economic Survey 2024 2025 p.246",
+    "hit": true,
+    "retrieved": [
+     "Economic Survey 2024 2025 p.246",
+     "Economic Survey Complete 2023 2024 p.405",
+     "Indain Economy Survey 2025 2026 p.360",
+     "Economic Survey 2024 2025 p.245",
+     "Economic Survey 2024 2025 p.245"
+    ]
+   },
+   {
+    "id": "q24",
+    "type": "lookup",
+    "question": "Where does India rank globally in the technical textiles industry, according to the Economic Survey 2024-25?",
+    "expected": "Economic Survey 2024 2025 p.246",
+    "hit": true,
+    "retrieved": [
+     "Economic Survey 2024 2025 p.246",
+     "Indain Economy Survey 2025 2026 p.360",
+     "Economic Survey Complete 2023 2024 p.405",
+     "Economic Survey 2024 2025 p.141",
+     "Economic Survey 2024 2025 p.245"
+    ]
+   }
+  ]
+ },
+ "hybrid_rerank": {
+  "strategy": "section",
+  "mode": "hybrid_rerank",
+  "overall_hit_rate@5": 0.783,
+  "by_type": {
+   "lookup": 0.909,
+   "multi-hop": 0.8,
+   "exact-number": 0.571
+  },
+  "counts_by_type": {
+   "lookup": "10/11",
+   "multi-hop": "4/5",
+   "exact-number": "4/7"
+  },
+  "details": [
+   {
+    "id": "q01",
+    "type": "lookup",
+    "question": "What is the repo rate according to the RBI's 2025-26 Annual Report?",
+    "expected": "2025 2026 Rbi Annual Report p.30",
+    "hit": false,
+    "retrieved": [
+     "Indain Economy Survey 2025 2026 p.138",
+     "Economic Survey 2024 2025 p.81",
+     "2025 2026 Rbi Annual Report p.65",
+     "2025 2026 Rbi Annual Report p.85",
+     "2025 2026 Rbi Annual Report p.97"
+    ]
+   },
+   {
+    "id": "q02",
+    "type": "multi-hop",
+    "question": "What caused food inflation to moderate in 2025-26 according to the Economic Survey?",
+    "expected": "Indain Economy Survey 2025 2026 p.[254, 261, 263]",
+    "hit": true,
+    "retrieved": [
+     "2025 2026 Rbi Annual Report p.56",
+     "Indain Economy Survey 2025 2026 p.254",
+     "2025 2026 Rbi Annual Report p.86",
+     "2025 2026 Rbi Annual Report p.52",
+     "2025 2026 Rbi Annual Report p.87"
+    ]
+   },
+   {
+    "id": "q03",
+    "type": "exact-number",
+    "question": "By how many basis points did the Monetary Policy Committee cut the policy repo rate as mentioned in the RBI Annual Report 2025-26?",
+    "expected": "2025 2026 Rbi Annual Report p.30",
+    "hit": false,
+    "retrieved": [
+     "2025 2026 Rbi Annual Report p.85",
+     "Indain Economy Survey 2025 2026 p.138",
+     "2025 2026 Rbi Annual Report p.224",
+     "Economic Survey Complete 2023 2024 p.86",
+     "Economic Survey 2024 2025 p.81"
+    ]
+   },
+   {
+    "id": "q04",
+    "type": "lookup",
+    "question": "What is a measure of central tendency?",
+    "expected": "Statistics For Indian Economy Ch5 p.1",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch5 p.1",
+     "Statistics For Indian Economy Ch5 p.14",
+     "Statistics For Indian Economics Ch8 p.3",
+     "Statistics For Indian Economy Ch5 p.10",
+     "Statistics For Indian Economy Ch5 p.13"
+    ]
+   },
+   {
+    "id": "q05",
+    "type": "multi-hop",
+    "question": "How did liquidity conditions in the banking system change between Q2 and Q3 of 2025-26, and what actions did the RBI take in response?",
+    "expected": "2025 2026 Rbi Annual Report p.66",
+    "hit": false,
+    "retrieved": [
+     "2025 2026 Rbi Annual Report p.91",
+     "2025 2026 Rbi Annual Report p.92",
+     "2025 2026 Rbi Annual Report p.93",
+     "Indain Economy Survey 2025 2026 p.138",
+     "2025 2026 Rbi Annual Report p.85"
+    ]
+   },
+   {
+    "id": "q07",
+    "type": "exact-number",
+    "question": "In the discrete series median example with N=20 observations, which observation determines the median's position?",
+    "expected": "Statistics For Indian Economy Ch5 p.9",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch5 p.8",
+     "Statistics For Indian Economy Ch5 p.9",
+     "Statistics For Indian Economy Ch5 p.8",
+     "Statistics For Indian Economy Ch5 p.11",
+     "Statistics For Indian Economy Ch5 p.10"
+    ]
+   },
+   {
+    "id": "q08",
+    "type": "lookup",
+    "question": "Give an example of a data series that has no mode, as discussed in the statistics chapter on central tendency.",
+    "expected": "Statistics For Indian Economy Ch5 p.11",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch5 p.11",
+     "Statistics For Indian Economy Ch5 p.1",
+     "Statistics For Indian Economy Ch5 p.11",
+     "Statistics For Indian Economy Ch5 p.14",
+     "Statistics For Indian Economy Ch5 p.10"
+    ]
+   },
+   {
+    "id": "q09",
+    "type": "multi-hop",
+    "question": "Why is the correlation between the arrival of migratory birds and birth rates in a locality not considered a cause-and-effect relationship?",
+    "expected": "Statistics For Indian Economy Ch6 p.2",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch6 p.2",
+     "Statistics For Indian Economy Ch6 p.2",
+     "Statistics For Indian Economy Ch6 p.14",
+     "Economic Survey 2024 2025 p.299",
+     "Statistics For Indian Economy Ch6 p.4"
+    ]
+   },
+   {
+    "id": "q10",
+    "type": "lookup",
+    "question": "What does an upward-rising scatter of points between two variables indicate about their relationship?",
+    "expected": "Statistics For Indian Economy Ch6 p.4",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch6 p.4",
+     "Statistics For Indian Economy Ch6 p.3",
+     "Statistics For Indian Economy Ch6 p.4",
+     "Statistics For Indian Economy Ch6 p.14",
+     "Statistics For Indian Economy Ch6 p.4"
+    ]
+   },
+   {
+    "id": "q11",
+    "type": "multi-hop",
+    "question": "Which correlation measure should be used when dealing with qualitative attributes such as fairness, honesty, or beauty, rather than numerically measurable variables?",
+    "expected": "Statistics For Indian Economy Ch6 p.11",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch6 p.11",
+     "Statistics For Indian Economy Ch6 p.3",
+     "Statistics For Indian Economy Ch6 p.14",
+     "Statistics For Indian Economy Ch6 p.3",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.59"
+    ]
+   },
+   {
+    "id": "q12",
+    "type": "lookup",
+    "question": "What is the formula used to locate the median's position in a discrete series?",
+    "expected": "Statistics For Indian Economy Ch5 p.9",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economy Ch5 p.8",
+     "Statistics For Indian Economy Ch5 p.9",
+     "Statistics For Indian Economy Ch5 p.10",
+     "Statistics For Indian Economy Ch5 p.8",
+     "Statistics For Indian Economy Ch5 p.11"
+    ]
+   },
+   {
+    "id": "q13",
+    "type": "exact-number",
+    "question": "Which expenditure item received the highest allocation in the Union Budget 2026-27, according to the Key Features of Budget document?",
+    "expected": "Key Features Of Budget 2026 2027 p.21",
+    "hit": false,
+    "retrieved": [
+     "Key To Budget Document 2026 p.2",
+     "2025 2026 Rbi Annual Report p.75",
+     "Indain Economy Survey 2025 2026 p.106",
+     "Indain Economy Survey 2025 2026 p.113",
+     "2025 2026 Rbi Annual Report p.35"
+    ]
+   },
+   {
+    "id": "q14",
+    "type": "exact-number",
+    "question": "What was the Defence allocation in the Union Budget 2026-27 expenditure breakdown?",
+    "expected": "Key Features Of Budget 2026 2027 p.21",
+    "hit": false,
+    "retrieved": [
+     "2025 2026 Rbi Annual Report p.77",
+     "Economic Survey 2024 2025 p.66",
+     "Indain Economy Survey 2025 2026 p.106",
+     "Key To Budget Document 2026 p.5",
+     "Economic Survey Complete 2023 2024 p.68"
+    ]
+   },
+   {
+    "id": "q15",
+    "type": "exact-number",
+    "question": "In the two-firm GDP example in the macroeconomics chapter on national income, what is the computed GDP when Value Added by Firm A is 50 and Value Added by Firm B is 150?",
+    "expected": "Macroeconomics Ch2 p.15",
+    "hit": true,
+    "retrieved": [
+     "Macroeconomics Ch2 p.15",
+     "Macroeconomics Ch2 p.12",
+     "Macroeconomics Ch2 p.15",
+     "Macroeconomics Ch2 p.16",
+     "Macroeconomics Ch2 p.1"
+    ]
+   },
+   {
+    "id": "q16",
+    "type": "lookup",
+    "question": "How is net investment calculated, according to the macroeconomics chapter on national income?",
+    "expected": "Macroeconomics Ch2 p.4",
+    "hit": true,
+    "retrieved": [
+     "Macroeconomics Ch2 p.24",
+     "Macroeconomics Ch2 p.1",
+     "Macroeconomics Ch 4 p.1",
+     "Macroeconomics Ch2 p.25",
+     "Macroeconomics Ch2 p.4"
+    ]
+   },
+   {
+    "id": "q17",
+    "type": "multi-hop",
+    "question": "Which Indian state has a better human development ranking than Haryana despite having a lower per capita income, according to the development economics chapter?",
+    "expected": "Basic Economy Ch1 p.15",
+    "hit": true,
+    "retrieved": [
+     "Basic Economy Ch1 p.15",
+     "Basic Economy Ch1 p.9",
+     "Basic Economy Ch1 p.13",
+     "Basic Economy Ch1 p.9",
+     "Basic Economy Ch1 p.15"
+    ]
+   },
+   {
+    "id": "q18",
+    "type": "lookup",
+    "question": "Why is per capita income calculated in a dollar-adjusted way for comparison across countries?",
+    "expected": "Basic Economy Ch1 p.12",
+    "hit": true,
+    "retrieved": [
+     "Basic Economy Ch1 p.7",
+     "Basic Economy Ch1 p.12",
+     "Macroeconomics Ch2 p.21",
+     "Basic Economy Ch1 p.8",
+     "Basic Economy Ch1 p.8"
+    ]
+   },
+   {
+    "id": "q19",
+    "type": "exact-number",
+    "question": "During the colonial period, roughly what percentage of India's workforce was engaged in agriculture, according to the Indian Economy Class 11 chapter on the pre-independence economy?",
+    "expected": "Indian Economy Class11 Ch1 p.11",
+    "hit": true,
+    "retrieved": [
+     "Indian Economy Class11 Ch6 p.10",
+     "Indian Economy Class11 Ch1 p.5",
+     "Indian Economy Class11 Ch1 p.11",
+     "Economic Survey Complete 2023 2024 p.321",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.79"
+    ]
+   },
+   {
+    "id": "q20",
+    "type": "lookup",
+    "question": "Which two industries marked the beginning of modern industry in India during the colonial period?",
+    "expected": "Indian Economy Class11 Ch1 p.7",
+    "hit": true,
+    "retrieved": [
+     "Indian Economy Class11 Ch1 p.7",
+     "Indian Economy Class11 Ch1 p.7",
+     "Indian Economy Class11 Ch1 p.14",
+     "Indian Economy Class11 Ch1 p.8",
+     "Indian Economy Class11 Ch1 p.13"
+    ]
+   },
+   {
+    "id": "q21",
+    "type": "lookup",
+    "question": "Who defined economics as 'the study of man in the ordinary business of life'?",
+    "expected": "Statistics For Indian Economics Ch1 p.1",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economics Ch1 p.1",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.36",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.37",
+     "Statistics For Indian Economics Ch1 p.3",
+     "Ramesh Singh - Indian Economy - For Civil Services, Universities And Other Examinations-Mcgraw Hill Education (2018) p.34"
+    ]
+   },
+   {
+    "id": "q22",
+    "type": "lookup",
+    "question": "What are measures that help solve an economic problem called, in economics terminology?",
+    "expected": "Statistics For Indian Economics Ch1 p.4",
+    "hit": true,
+    "retrieved": [
+     "Statistics For Indian Economics Ch1 p.4",
+     "Statistics For Indian Economics Ch1 p.7",
+     "Statistics For Indian Economics Ch1 p.4",
+     "Statistics For Indian Economics Ch1 p.8",
+     "Statistics For Indian Economics Ch1 p.5"
+    ]
+   },
+   {
+    "id": "q23",
+    "type": "exact-number",
+    "question": "What is the size of India's technical textiles market in FY24, according to the Economic Survey 2024-25?",
+    "expected": "Economic Survey 2024 2025 p.246",
+    "hit": true,
+    "retrieved": [
+     "Economic Survey 2024 2025 p.246",
+     "Economic Survey 2024 2025 p.245",
+     "Economic Survey Complete 2023 2024 p.405",
+     "Indain Economy Survey 2025 2026 p.361",
+     "Economic Survey 2024 2025 p.245"
+    ]
+   },
+   {
+    "id": "q24",
+    "type": "lookup",
+    "question": "Where does India rank globally in the technical textiles industry, according to the Economic Survey 2024-25?",
+    "expected": "Economic Survey 2024 2025 p.246",
+    "hit": true,
+    "retrieved": [
+     "Economic Survey 2024 2025 p.246",
+     "Economic Survey 2024 2025 p.245",
+     "Indain Economy Survey 2025 2026 p.360",
+     "Economic Survey Complete 2023 2024 p.405",
+     "Economic Survey 2024 2025 p.140"
+    ]
+   }
+  ]
+ }
+}

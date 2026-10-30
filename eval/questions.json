@@ -1,0 +1,324 @@
+[
+  {
+    "id": "q01",
+    "type": "lookup",
+    "question": "What is the repo rate according to the RBI's 2025-26 Annual Report?",
+    "answer": "Check the RBI Annual Report 2025-26 for the exact current repo rate figure.",
+    "document": "2025 2026 Rbi Annual Report",
+    "page": 30
+  },
+    {
+    "id": "q02",
+    "type": "multi-hop",
+    "question": "What caused food inflation to moderate in 2025-26 according to the Economic Survey?",
+    "answer": "A sustained decline in vegetable prices and favorable supply conditions, per the Economic Survey / RBI Annual Report.",
+    "document": "Indain Economy Survey 2025 2026",
+    "page": [254, 261, 263]
+  },
+  {
+    "id": "q03",
+    "type": "exact-number",
+    "question": "By how many basis points did the Monetary Policy Committee cut the policy repo rate as mentioned in the RBI Annual Report 2025-26?",
+    "answer": "100 basis points (bps).",
+    "document": "2025 2026 Rbi Annual Report",
+    "page": 30
+  },
+  {
+    "id": "q04",
+    "type": "lookup",
+    "question": "What is a measure of central tendency?",
+    "answer": "A single value that represents or summarizes a set of data (e.g., mean, median, mode).",
+    "document": "Statistics For Indian Economy Ch5",
+    "page": 1
+  },
+  {
+    "id": "q05",
+    "type": "multi-hop",
+    "question": "How did liquidity conditions in the banking system change between Q2 and Q3 of 2025-26, and what actions did the RBI take in response?",
+    "answer": "Requires combining liquidity trend info with RBI's VRRR/VRR auction actions across both quarters.",
+    "document": "2025 2026 Rbi Annual Report",
+    "page": 66
+  },
+  {
+    "id": "q06",
+    "type": "unanswerable",
+    "question": "What was India's repo rate in the year 2030?",
+    "answer": "Not answerable — no document in the corpus covers 2030.",
+    "document": null,
+    "page": null
+  },
+  {
+    "id": "q07",
+    "type": "exact-number",
+    "question": "In the discrete series median example with N=20 observations, which observation determines the median's position?",
+    "answer": "The 10.5th observation, since (N+1)/2 = (20+1)/2 = 10.5.",
+    "document": "Statistics For Indian Economy Ch5",
+    "page": 9
+  },
+  {
+    "id": "q08",
+    "type": "lookup",
+    "question": "Give an example of a data series that has no mode, as discussed in the statistics chapter on central tendency.",
+    "answer": "The series 1, 1, 2, 2, 3, 3, 4, 4 has no mode.",
+    "document": "Statistics For Indian Economy Ch5",
+    "page": 11
+  },
+  {
+    "id": "q09",
+    "type": "multi-hop",
+    "question": "Why is the correlation between the arrival of migratory birds and birth rates in a locality not considered a cause-and-effect relationship?",
+    "answer": "Because the relationship is coincidental rather than causal — correlation between two variables does not by itself imply causation.",
+    "document": "Statistics For Indian Economy Ch6",
+    "page": 2
+  },
+  {
+    "id": "q10",
+    "type": "lookup",
+    "question": "What does an upward-rising scatter of points between two variables indicate about their relationship?",
+    "answer": "Positive correlation — when X rises, Y also rises.",
+    "document": "Statistics For Indian Economy Ch6",
+    "page": 4
+  },
+  {
+    "id": "q11",
+    "type": "multi-hop",
+    "question": "Which correlation measure should be used when dealing with qualitative attributes such as fairness, honesty, or beauty, rather than numerically measurable variables?",
+    "answer": "Spearman's rank correlation coefficient, since such attributes can only be ranked, not measured numerically.",
+    "document": "Statistics For Indian Economy Ch6",
+    "page": 11
+  },
+  {
+    "id": "q12",
+    "type": "lookup",
+    "question": "What is the formula used to locate the median's position in a discrete series?",
+    "answer": "(N+1)/2, where N is the total number of observations.",
+    "document": "Statistics For Indian Economy Ch5",
+    "page": 9
+  },
+
+    {
+    "id": "q13",
+    "type": "exact-number",
+    "question": "Which expenditure item received the highest allocation in the Union Budget 2026-27, according to the Key Features of Budget document?",
+    "answer": "Transport, at ₹5,98,520 crore — the highest among the listed major expenditure items.",
+    "document": "Key Features Of Budget 2026 2027",
+    "page": 21
+  },
+  {
+    "id": "q14",
+    "type": "exact-number",
+    "question": "What was the Defence allocation in the Union Budget 2026-27 expenditure breakdown?",
+    "answer": "₹5,94,585 crore.",
+    "document": "Key Features Of Budget 2026 2027",
+    "page": 21
+  },
+  {
+    "id": "q15",
+    "type": "exact-number",
+    "question": "In the two-firm GDP example in the macroeconomics chapter on national income, what is the computed GDP when Value Added by Firm A is 50 and Value Added by Firm B is 150?",
+    "answer": "GDP = 200 (VA_A + VA_B = 50 + 150 = 200).",
+    "document": "Macroeconomics Ch2",
+    "page": 15
+  },
+  {
+    "id": "q16",
+    "type": "lookup",
+    "question": "How is net investment calculated, according to the macroeconomics chapter on national income?",
+    "answer": "Net Investment = Gross Investment – Depreciation.",
+    "document": "Macroeconomics Ch2",
+    "page": 4
+  },
+  {
+    "id": "q17",
+    "type": "multi-hop",
+    "question": "Which Indian state has a better human development ranking than Haryana despite having a lower per capita income, according to the development economics chapter?",
+    "answer": "Kerala.",
+    "document": "Basic Economy Ch1",
+    "page": 15
+  },
+  {
+    "id": "q18",
+    "type": "lookup",
+    "question": "Why is per capita income calculated in a dollar-adjusted way for comparison across countries?",
+    "answer": "So that every dollar would buy the same amount of goods and services in any country (purchasing-power adjustment).",
+    "document": "Basic Economy Ch1",
+    "page": 12
+  },
+  {
+    "id": "q19",
+    "type": "exact-number",
+    "question": "During the colonial period, roughly what percentage of India's workforce was engaged in agriculture, according to the Indian Economy Class 11 chapter on the pre-independence economy?",
+    "answer": "About 70-75 per cent.",
+    "document": "Indian Economy Class11 Ch1",
+    "page": 11
+  },
+  {
+    "id": "q20",
+    "type": "lookup",
+    "question": "Which two industries marked the beginning of modern industry in India during the colonial period?",
+    "answer": "Cotton and jute textile mills.",
+    "document": "Indian Economy Class11 Ch1",
+    "page": 7
+  },
+  {
+    "id": "q21",
+    "type": "lookup",
+    "question": "Who defined economics as 'the study of man in the ordinary business of life'?",
+    "answer": "Alfred Marshall.",
+    "document": "Statistics For Indian Economics Ch1",
+    "page": 1
+  },
+  {
+    "id": "q22",
+    "type": "lookup",
+    "question": "What are measures that help solve an economic problem called, in economics terminology?",
+    "answer": "Policies.",
+    "document": "Statistics For Indian Economics Ch1",
+    "page": 4
+  },
+  {
+    "id": "q23",
+    "type": "exact-number",
+    "question": "What is the size of India's technical textiles market in FY24, according to the Economic Survey 2024-25?",
+    "answer": "US$26.8 billion.",
+    "document": "Economic Survey 2024 2025",
+    "page": 246
+  },
+  {
+    "id": "q24",
+    "type": "lookup",
+    "question": "Where does India rank globally in the technical textiles industry, according to the Economic Survey 2024-25?",
+    "answer": "Fifth globally.",
+    "document": "Economic Survey 2024 2025",
+    "page": 246
+  },
+    {
+    "id": "q25",
+    "type": "lookup",
+    "question": "What is 'autonomous consumption' in macroeconomics?",
+    "answer": "Consumption that is independent of income — it occurs even when income is zero, denoted C-bar.",
+    "document": "Macroeconomics Ch 4",
+    "page": 2
+  },
+  {
+    "id": "q26",
+    "type": "lookup",
+    "question": "What does the term 'ceteris paribus' mean?",
+    "answer": "'Other things remaining equal' — holding all other variables constant while analyzing one.",
+    "document": "Macroeconomics Ch 4",
+    "page": 1
+  },
+  {
+    "id": "q27",
+    "type": "multi-hop",
+    "question": "What is the difference between 'ex ante' planned values and actual outcomes in macroeconomics, as explained in the national income determination chapter?",
+    "answer": "Ex ante refers to planned/intended values (e.g. planned investment or planned aggregate demand) before the fact, which can differ from what actually happens (ex post).",
+    "document": "Macroeconomics Ch 4",
+    "page": [2, 4]
+  },
+  {
+    "id": "q28",
+    "type": "lookup",
+    "question": "What are 'inferior goods' in consumer theory?",
+    "answer": "Goods whose demand moves in the opposite direction of the consumer's income — demand falls as income rises.",
+    "document": "Microececonomy Chapter 2",
+    "page": 17
+  },
+  {
+    "id": "q29",
+    "type": "lookup",
+    "question": "What does it mean for a consumer's preferences to be 'monotonic'?",
+    "answer": "Between any two bundles, the consumer prefers the one with more of at least one good and no less of the other.",
+    "document": "Microececonomy Chapter 2",
+    "page": 6
+  },
+  {
+    "id": "q30",
+    "type": "exact-number",
+    "question": "In the elasticity example in the microeconomics chapter on consumer behaviour, by what percentage does demand drop when price increases by 10%?",
+    "answer": "12%.",
+    "document": "Microececonomy Chapter 2",
+    "page": 24
+  },
+  {
+    "id": "q31",
+    "type": "lookup",
+    "question": "What is 'Secondary Data' in statistics?",
+    "answer": "Data originally collected by some other agency, rather than collected firsthand by the user — obtained from published sources like government reports, newspapers, or websites.",
+    "document": "Statistics For Indian Economics Ch2",
+    "page": 2
+  },
+  {
+    "id": "q32",
+    "type": "exact-number",
+    "question": "What is the name of the quarterly journal through which the National Sample Survey (NSS) releases its data?",
+    "answer": "Sarvekshana.",
+    "document": "Statistics For Indian Economics Ch2",
+    "page": 11
+  },
+  {
+    "id": "q33",
+    "type": "lookup",
+    "question": "What is a 'leading question' in survey design?",
+    "answer": "A question that gives a clue about how the respondent should answer, e.g. 'Don't you think smoking should be prohibited?' rather than a neutral phrasing.",
+    "document": "Statistics For Indian Economics Ch2",
+    "page": 4
+  },
+  {
+    "id": "q34",
+    "type": "exact-number",
+    "question": "According to the Economic Survey 2023-24, how many individual investors are there in India's stock market?",
+    "answer": "Over 9.5 crore.",
+    "document": "Economic Survey Complete 2023 2024",
+    "page": 113
+  },
+  {
+    "id": "q35",
+    "type": "exact-number",
+    "question": "How much liquidity was impounded from the banking system through the Incremental Cash Reserve Ratio (I-CRR), according to the Economic Survey 2023-24?",
+    "answer": "About ₹1.1 lakh crore.",
+    "document": "Economic Survey Complete 2023 2024",
+    "page": 88
+  },
+  {
+    "id": "q36",
+    "type": "lookup",
+    "question": "In which four key areas did India score 100 per cent in a trade facilitation assessment, according to the Economic Survey 2023-24?",
+    "answer": "Transparency, Formalities, Institutional Arrangement and Cooperation, and Paperless Trade.",
+    "document": "Economic Survey Complete 2023 2024",
+    "page": 178
+  },
+  {
+    "id": "q37",
+    "type": "lookup",
+    "question": "Which two international institutions did India borrow from to resolve its balance of payments crisis?",
+    "answer": "The IMF and the World Bank.",
+    "document": "Indian Economy Class11 Ch4",
+    "page": 13
+  },
+  {
+    "id": "q38",
+    "type": "lookup",
+    "question": "What economic framework did India follow after independence, combining capitalist and socialist advantages?",
+    "answer": "The mixed economy framework.",
+    "document": "Indian Economy Class11 Unit 2",
+    "page": 4
+  },
+  {
+    "id": "q39",
+    "type": "lookup",
+    "question": "Globalisation is described as the outcome of which two economic policies?",
+    "answer": "Liberalisation and privatisation.",
+    "document": "Indian Economy Class11 Unit 2",
+    "page": 17
+  },
+  {
+    "id": "q40",
+    "type": "multi-hop",
+    "question": "Which national-level agencies in India are responsible for collecting and publishing official statistical data, and how does their output relate to the concept of 'secondary data'?",
+    "answer": "Agencies like the Census of India, NSS, CSO, RGI, DGCIS, and the Labour Bureau collect and publish data; when researchers use this published data rather than collecting it themselves, it counts as secondary data.",
+    "document": "Statistics For Indian Economics Ch2",
+    "page": [2, 11]
+  }
+
+]
