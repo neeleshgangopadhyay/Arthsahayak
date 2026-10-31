@@ -1,12 +1,14 @@
 import sys
 import types
-
+ 
 from news_tool import fetch_recent_news
-
+ 
 from verifier import web_verify
-
+ 
 import datetime
-
+ 
+import re
+ 
 # Windows Application Control blocks ormsgpack's compiled DLL, same class of issue
 # as the PyTorch block in Step 1. LangGraph only needs ormsgpack for an optional
 # checkpointing/caching feature we don't use (we compile the graph with no
@@ -23,25 +25,25 @@ class _FakeOrmsgpack(types.ModuleType):
                 "so this shouldn't normally happen."
             )
         return _stub
-
+ 
 sys.modules.setdefault("ormsgpack", _FakeOrmsgpack("ormsgpack"))
-
+ 
 from typing import TypedDict
-
+ 
 from langgraph.graph import END, StateGraph
-
+ 
 from guardrails import check_input, check_output
 from llm_gateway import call_llm
 from query_enhancement import enhanced_search
-
+ 
 MAX_REFLECTION_ATTEMPTS = 2
-
-
+ 
+ 
 class AgentState(TypedDict):
     question: str
     allowed: bool
     rejection_reason: str
-    action: str                 # "retrieve", "news", or "clarify"
+    action: str                 # "retrieve", "news", "verify", or "clarify"
     clarifying_question: str
     retrieved: list
     queries_used: list
@@ -50,29 +52,29 @@ class AgentState(TypedDict):
     groundedness_reason: str
     attempts: int
     final_answer: str
-
-
+ 
+ 
 # --- Node 1: input guardrail -------------------------------------------------
-
+ 
 def input_guardrail_node(state: AgentState) -> AgentState:
     allowed, reason = check_input(state["question"])
     return {**state, "allowed": allowed, "rejection_reason": reason}
-
-
+ 
+ 
 def route_after_guardrail(state: AgentState) -> str:
     return "reject" if not state["allowed"] else "plan"
-
-
+ 
+ 
 def reject_node(state: AgentState) -> AgentState:
     return {**state, "final_answer": f"I can't help with that: {state['rejection_reason']}"}
-
-
+ 
+ 
 # --- Node 2: planner ----------------------------------------------------------
-
+ 
 PLANNER_PROMPT = """You are the planning component of an agentic RAG system over Indian \
 Economics documents (RBI reports, Economic Surveys, NCERT textbooks, budget documents), with \
 additional abilities to fetch recent financial news and run a real-time web search.
-
+ 
 Given the user's question, decide ONE of four actions:
 - "retrieve": the question is answerable from the stored documents (RBI reports, Economic \
 Surveys, budgets, NCERT textbooks) — historical data, policy explanations, definitions, past \
@@ -84,14 +86,14 @@ number, e.g. "the repo rate is 7% right now, right?") that should be fact-checke
 real-time web search, because it needs a precise, targeted lookup rather than a general news scan.
 - "clarify": the question is too vague or broad to search meaningfully (e.g. "tell me about the \
 economy", "what about inflation?" with no further context) and needs a follow-up question first.
-
+ 
 If choosing "clarify", also write ONE short, specific clarifying question to ask the user.
-
+ 
 Output ONLY a JSON object, nothing else: {{"action": "retrieve" or "news" or "verify" or "clarify", "clarifying_question": "..." or null}}
-
+ 
 User question: {question}
 JSON:"""
-
+ 
 def planner_node(state: AgentState) -> AgentState:
     import json
     text, _ = call_llm(
@@ -105,8 +107,8 @@ def planner_node(state: AgentState) -> AgentState:
     except (json.JSONDecodeError, AttributeError):
         action, clarifying_question = "retrieve", ""  # fail safe: default to attempting retrieval
     return {**state, "action": action, "clarifying_question": clarifying_question}
-
-
+ 
+ 
 def route_after_plan(state: AgentState) -> str:
     if state["action"] == "clarify":
         return "clarify"
@@ -115,21 +117,21 @@ def route_after_plan(state: AgentState) -> str:
     if state["action"] == "verify":
         return "verify"
     return "retrieve"
-
-
+ 
+ 
 def clarify_node(state: AgentState) -> AgentState:
     return {**state, "final_answer": state["clarifying_question"]}
-
-
+ 
+ 
 # --- Node 3: retrieve ---------------------------------------------------------
-
+ 
 def retrieve_node(state: AgentState) -> AgentState:
     results, queries_used = enhanced_search(state["question"])
     return {**state, "retrieved": results, "queries_used": queries_used}
-
-
+ 
+ 
 # --- Node 3b: news (live current-events branch) -------------------------------
-
+ 
 def news_node(state: AgentState) -> AgentState:
     """
     Fetches recent items from the live news feeds (news_tool.py) and reshapes
@@ -149,9 +151,9 @@ def news_node(state: AgentState) -> AgentState:
         for item in items
     ]
     return {**state, "retrieved": pseudo_chunks, "queries_used": ["(live news feeds)"]}
-
+ 
 # --- Node 3c: verify (real-time web search for a specific asserted claim) ----
-
+ 
 VERIFY_QUERY_PROMPT = """Turn the user's question into a short, targeted web search query to \
 fact-check a specific Indian economic figure or claim. Today's year is {year}, so include it (or \
 "latest") in the query so the search finds the MOST RECENT figure, not an old one. This system is \
@@ -159,11 +161,11 @@ about the INDIAN economy specifically, so always include "India" or "Indian" in 
 specific metric being asked about (e.g. repo rate, GDP growth, inflation, fiscal deficit). Strip \
 conversational phrasing like "right?" and percent signs - output ONLY plain search query words, no \
 URL encoding, no punctuation beyond spaces.
-
+ 
 User question: {question}
 Search query:"""
-
-
+ 
+ 
 def build_verify_query(question):
     year = datetime.datetime.now().year
     text, _ = call_llm(
@@ -175,8 +177,8 @@ def build_verify_query(question):
     # instead of plain spaces, despite the prompt - sanitize rather than retry.
     query = query.replace("%20", " ").replace("%", "")
     return query
-
-
+ 
+ 
 def verify_node(state: AgentState) -> AgentState:
     """
     Fact-checks a user-asserted figure via a live Tavily web search, reshaped
@@ -192,32 +194,30 @@ def verify_node(state: AgentState) -> AgentState:
         for item in results
     ]
     return {**state, "retrieved": pseudo_chunks, "queries_used": [f"(live web search: {query!r})"]}
-
-
-
-
+ 
+ 
+ 
+ 
 # --- Node 4: generate ----------------------------------------------------------
-
+ 
 GENERATE_PROMPT = """You are answering a question about Indian Economics using ONLY the \
-retrieved context below. Cite the document and page for every claim, like \
-(Economic Survey 2024-25, p.167). If the context doesn't fully answer the question, say \
-what's missing rather than guessing. Do not mention any fact, figure, or example — even \
-in passing or hedged as "elsewhere" — that is not explicitly present in the context below.
-
-If the user's question itself asserts a specific fact, figure, or number as if it were true \
-(e.g. "given that the repo rate is 7%..." or "since inflation is at 9%..."), check that claim \
-against the context. If the context contradicts it, do not go along with the user's number — \
-point out the correct figure from the context first, cite it, and only then answer the rest of \
-the question using the corrected figure. If the context doesn't cover that specific claim, say \
-you can't verify it rather than silently accepting or silently ignoring it.
+retrieved context below. Cite the source for every claim using this EXACT marker format, \
+not regular parentheses: {{cite: Source Name}} for a source with no page number, or \
+{{cite: Source Name, p.167}} for a source with a page number — matching whichever is shown \
+for that source in the context below (a source with no page shows "p.-"; cite it without \
+a page). Put one {{cite: ...}} marker per source, right after the claim it supports. Never \
+invent a page number for a source that doesn't have one, and never cite a source that isn't \
+in the context below. If the context doesn't fully answer the question, say what's missing \
+rather than guessing. Do not mention any fact, figure, or example — even in passing or hedged \
+as "elsewhere" — that is not explicitly present in the context below.
 {feedback_block}
 CONTEXT:
 {context}
-
+ 
 QUESTION: {question}
-
-ANSWER (with citations):"""
-
+ 
+ANSWER (with {{cite: ...}} markers):"""
+ 
 def generate_node(state: AgentState) -> AgentState:
     context = "\n\n".join(
         f"[{c['document']} p.{c['page']}]: {c['text']}" for c in state["retrieved"]
@@ -238,39 +238,123 @@ def generate_node(state: AgentState) -> AgentState:
         temperature=0.0, max_tokens=max_tokens, reasoning_effort="low",
     )
     return {**state, "draft_answer": text.strip()}
-
-
+ 
+ 
 # --- Node 5: reflect (self-check via output guardrail) ------------------------
-
+ 
+CITE_PATTERN = re.compile(
+    r"(?:[\{\[\(【《]{1,2}\s*cite:\s*(.+?)\s*[\}\]\)】》]{1,2})"
+    r"|(?:[\{\[【《]{1,2}\s*(.+?)\s*[\}\]】》]{1,2})",
+    re.IGNORECASE,
+)
+# Two alternatives: (1) an explicit "cite:" label inside ANY bracket style
+# (including plain parentheses) - the "cite:" word is what disambiguates this
+# from an ordinary acronym aside like "(RBI)". (2) bare content inside a
+# non-parenthesis bracket ({}, [], 【】, 《》) with no "cite:" label - the model
+# sometimes drops the label but keeps using a distinctive bracket style, and
+# since ordinary English prose never uses curly/fullwidth brackets for an
+# acronym gloss, those bracket types alone are enough signal that it's a
+# citation. Plain "(...)" without "cite:" is never treated as a citation.
+ 
+ 
+def _normalize(text):
+    # Unify dash variants (en dash, non-breaking hyphen) and collapse whitespace,
+    # so a typographic difference doesn't cause a false "unknown citation".
+    text = re.sub(r"[‐-―−]", "-", text)
+    return re.sub(r"\s+", " ", text).strip().lower()
+ 
+ 
+def _iter_cite_matches(answer):
+    for m in CITE_PATTERN.finditer(answer):
+        raw = m.group(1) if m.group(1) is not None else m.group(2)
+        yield m, raw
+ 
+ 
+def extract_cited_sources(answer):
+    """
+    Pulls source names out of citation markers. The model is instructed to use
+    {{cite: ...}}, but in practice improvises bracket styles ({cite: ...},
+    【cite: ...】, or drops the "cite:" label entirely) - same lesson as the
+    earlier %20 sanitization fix: parse tolerantly rather than relying purely
+    on prompt compliance.
+    """
+    cited = set()
+    for _, raw in _iter_cite_matches(answer):
+        name = re.sub(r",?\s*p\.\s*[\w-]+$", "", raw).strip()
+        if name:
+            cited.add(name)
+    return cited
+ 
+ 
+def check_citations(answer, retrieved):
+    """
+    Citation-integrity guardrail: any "cite:" marker present should name a
+    document that was actually retrieved. Catches a fabricated or mismatched
+    citation even when the underlying fact happens to be grounded elsewhere -
+    a failure mode check_output alone wouldn't catch, since it checks facts,
+    not citation accuracy. A decline-to-answer response with no claims (and
+    therefore no citations) is not a violation, so absence of citations is
+    not itself flagged - only a citation that doesn't match any retrieved
+    source is.
+    """
+    known_sources = {_normalize(c["document"]) for c in retrieved}
+    cited = extract_cited_sources(answer)
+    if not cited:
+        return True, "no citations to check"
+    unknown = [
+        name for name in cited
+        if not any(_normalize(name) in k or k in _normalize(name) for k in known_sources)
+    ]
+    if unknown:
+        return False, f"citation(s) not found in retrieved context: {', '.join(unknown)}"
+    return True, "citations OK"
+ 
+ 
 def reflect_node(state: AgentState) -> AgentState:
     grounded, reason = check_output(state["draft_answer"], state["retrieved"])
+    if grounded:
+        citations_ok, citation_reason = check_citations(state["draft_answer"], state["retrieved"])
+        if not citations_ok:
+            grounded, reason = False, citation_reason
     attempts = state.get("attempts", 0) + 1
     return {**state, "grounded": grounded, "groundedness_reason": reason, "attempts": attempts}
-
-
+ 
 def route_after_reflect(state: AgentState) -> str:
     if state["grounded"] or state["attempts"] >= MAX_REFLECTION_ATTEMPTS:
         return "finalize"
     return "retry"
-
-
+ 
+ 
 # --- Node 6: finalize ----------------------------------------------------------
-
+ 
+def _render_citations(text):
+    """Converts internal citation markers (in whatever bracket style the model
+    used, "cite:"-labeled or not) into normal-looking parenthetical citations
+    for display, e.g. "(Livemint)" or "(Economic Survey 2024-25, p.167)". Drops
+    a placeholder "p.-" page marker (used for sources with no real page number,
+    like news/web results) so it doesn't show up oddly in the final answer."""
+    def _format(match):
+        raw = match.group(1) if match.group(1) is not None else match.group(2)
+        raw = re.sub(r",?\s*p\.\s*-\s*$", "", raw.strip()).strip()
+        return f"({raw})"
+    return CITE_PATTERN.sub(_format, text)
+ 
+ 
 def finalize_node(state: AgentState) -> AgentState:
-    answer = state["draft_answer"]
+    answer = _render_citations(state["draft_answer"])
     if not state["grounded"]:
         answer += (
             "\n\n(Note: this answer could not be fully verified against the source documents "
             "after multiple attempts. Treat it with caution.)"
         )
     return {**state, "final_answer": answer}
-
-
+ 
+ 
 # --- Build the graph -----------------------------------------------------------
-
+ 
 def build_agent():
     graph = StateGraph(AgentState)
-
+ 
     graph.add_node("guardrail", input_guardrail_node)
     graph.add_node("reject", reject_node)
     graph.add_node("plan", planner_node)
@@ -281,7 +365,7 @@ def build_agent():
     graph.add_node("generate", generate_node)
     graph.add_node("reflect", reflect_node)
     graph.add_node("finalize", finalize_node)
-
+ 
     graph.set_entry_point("guardrail")
     graph.add_conditional_edges("guardrail", route_after_guardrail, {"reject": "reject", "plan": "plan"})
     graph.add_edge("reject", END)
@@ -296,13 +380,13 @@ def build_agent():
     graph.add_edge("generate", "reflect")
     graph.add_conditional_edges("reflect", route_after_reflect, {"finalize": "finalize", "retry": "generate"})
     graph.add_edge("finalize", END)
-
+ 
     return graph.compile()
-
-
+ 
+ 
 if __name__ == "__main__":
     agent = build_agent()
-
+ 
     test_questions = [
         "What was India's repo rate as of the latest RBI Annual Report?",
         "Tell me about the economy.",
@@ -311,7 +395,7 @@ if __name__ == "__main__":
         "The repo rate is currently 7%, right? What does a rate that high mean for borrowers?",
         "The GDP Growth of India is 2% percent right now, right? What does that mean for the economy?",
     ]
-
+ 
     for q in test_questions:
         print(f"\n{'=' * 70}\nQUESTION: {q}\n{'=' * 70}")
         result = agent.invoke({"question": q, "attempts": 0})
@@ -321,3 +405,4 @@ if __name__ == "__main__":
         if "grounded" in result:
             print(f"\n[debug] grounded={result['grounded']}  attempts={result['attempts']}  "
               f"reason={result['groundedness_reason']!r}")
+ 
