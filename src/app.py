@@ -447,6 +447,14 @@ with st.sidebar:
                     if _tname == "collections":
                         _cur.execute("SELECT id, name FROM collections")
                         st.write(f"&nbsp;&nbsp;- rows: {_cur.fetchall()}")
+            _cur.execute("SELECT * FROM tenants")
+            st.write(f"tenants: {_cur.fetchall()}")
+            _cur.execute("SELECT * FROM databases")
+            st.write(f"databases: {_cur.fetchall()}")
+            _cur.execute("PRAGMA table_info(collections)")
+            st.write(f"collections columns: {_cur.fetchall()}")
+            _cur.execute("SELECT * FROM collections")
+            st.write(f"collections full rows: {_cur.fetchall()}")
             _conn.close()
         except Exception as _e:
             st.write(f"raw sqlite error: {_e}")
