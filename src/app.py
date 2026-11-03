@@ -430,6 +430,27 @@ with st.sidebar:
         except Exception as _e:
             st.write(f"chromadb error: {_e}")
  
+        # Bypass chromadb's own API entirely and query the raw sqlite file,
+        # to rule out whether this is a genuinely empty table versus a
+        # chromadb-layer issue specific to this environment.
+        try:
+            import sqlite3 as _sqlite3
+            _conn = _sqlite3.connect(str(_chroma_dir / "chroma.sqlite3"))
+            _cur = _conn.cursor()
+            _cur.execute("SELECT name FROM sqlite_master WHERE type='table'")
+            _tables = [r[0] for r in _cur.fetchall()]
+            st.write(f"raw sqlite tables: {_tables}")
+            for _tname in ("collections", "segments"):
+                if _tname in _tables:
+                    _cur.execute(f"SELECT count(*) FROM {_tname}")
+                    st.write(f"&nbsp;&nbsp;- {_tname} row count: **{_cur.fetchone()[0]}**")
+                    if _tname == "collections":
+                        _cur.execute("SELECT id, name FROM collections")
+                        st.write(f"&nbsp;&nbsp;- rows: {_cur.fetchall()}")
+            _conn.close()
+        except Exception as _e:
+            st.write(f"raw sqlite error: {_e}")
+ 
 st.title("ArthSahayak")
 st.caption("Ask a question about the Indian economy.")
  
