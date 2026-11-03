@@ -146,3 +146,5 @@ zstandard==0.25.0
 tavily-python==0.5.0
 
 streamlit==1.66.1
+feedparser==6.0.14
+feedparser-sgmllib==2.1.0
