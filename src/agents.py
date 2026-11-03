@@ -68,7 +68,7 @@ def input_guardrail_node(state: AgentState) -> AgentState:
  
  
 def route_after_guardrail(state: AgentState) -> str:
-    return "reject" if not state["allowed"] else "contextualize"
+    return "reject" if not state["allowed"] else "plan"
  
  
 def reject_node(state: AgentState) -> AgentState:
@@ -113,14 +113,24 @@ def _format_history(history, max_turns=3):
 def contextualize_node(state: AgentState) -> AgentState:
     """
     Rewrites the raw incoming message into a standalone question using the
-    conversation history, BEFORE planning, retrieval, or generation ever
-    see it. Without this, a follow-up like "the repo rate one" (answering
-    a clarifying question) or "what about last year?" (referring back to
-    an earlier answer) gets routed, searched, and answered completely out
-    of context, because every downstream node only ever looks at
-    state["question"] in isolation - it has no other way to know what came
-    before. Rewriting once, here, means every downstream node benefits
-    without needing its own history-handling logic.
+    conversation history, BEFORE the guardrail, planning, retrieval, or
+    generation ever see it. Without this, a follow-up like "the repo rate
+    one" (answering a clarifying question) or "what about last year?"
+    (referring back to an earlier answer) gets judged, routed, searched,
+    and answered completely out of context, because every downstream node
+    only ever looks at state["question"] in isolation - it has no other
+    way to know what came before. Rewriting once, here, means every
+    downstream node benefits without needing its own history-handling
+    logic.
+ 
+    This runs BEFORE the guardrail (not after, as in an earlier version)
+    specifically because the guardrail's own relevance check needs the
+    same context: a short follow-up like "what about in 2025?" looks too
+    vague/off-topic to judge in isolation and was being rejected outright,
+    even though it's a perfectly legitimate question once rewritten
+    against the history. The guardrail still protects the very first
+    message of a conversation exactly as before, since contextualize is a
+    no-op with no history to work from.
  
     When there's no history yet - the first turn of a conversation, or a
     caller (like eval_agent.py) that doesn't pass "history" at all - this
@@ -447,13 +457,13 @@ def build_agent():
     graph.add_node("reflect", reflect_node)
     graph.add_node("finalize", finalize_node)
  
-    graph.set_entry_point("guardrail")
+    graph.set_entry_point("contextualize")
+    graph.add_edge("contextualize", "guardrail")
     graph.add_conditional_edges(
         "guardrail", route_after_guardrail,
-        {"reject": "reject", "contextualize": "contextualize"},
+        {"reject": "reject", "plan": "plan"},
     )
     graph.add_edge("reject", END)
-    graph.add_edge("contextualize", "plan")
     graph.add_conditional_edges(
         "plan", route_after_plan,
         {"clarify": "clarify", "retrieve": "retrieve", "news": "news", "verify": "verify"},
