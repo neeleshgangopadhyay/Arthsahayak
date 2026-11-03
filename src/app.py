@@ -94,8 +94,34 @@ def ensure_data_present():
     project_root = Path(__file__).resolve().parent.parent
     chroma_dir = project_root / "chroma_db"
     index_dir = project_root / "index"
-    if chroma_dir.exists() and index_dir.exists():
+    chroma_sqlite = chroma_dir / "chroma.sqlite3"
+ 
+    def is_complete():
+        # A plain .exists() check isn't enough - an earlier deploy's download
+        # or extraction could have been interrupted partway (e.g. a new push
+        # landing mid-extract), leaving an empty/near-empty chroma_db folder
+        # that still "exists" and short-circuits re-downloading forever,
+        # since Streamlit Cloud appears to keep the same long-lived process
+        # across pushes rather than truly restarting it. Checking an actual
+        # size/content threshold catches that; a real chroma.sqlite3 here is
+        # ~236MB, and a real index/ has the chunks_*.json files ingest.py
+        # writes out.
+        if not chroma_sqlite.exists() or chroma_sqlite.stat().st_size < 10_000_000:
+            return False
+        if not index_dir.exists() or not any(index_dir.glob("chunks_*.json")):
+            return False
         return True
+ 
+    if is_complete():
+        return True
+ 
+    # Clean up whatever partial/stale state is there before redownloading,
+    # so extraction can't merge with leftover broken files.
+    import shutil
+    if chroma_dir.exists():
+        shutil.rmtree(chroma_dir)
+    if index_dir.exists():
+        shutil.rmtree(index_dir)
  
     import requests
  
@@ -115,6 +141,13 @@ def ensure_data_present():
         with zipfile.ZipFile(zip_path, "r") as zf:
             zf.extractall(project_root)
     zip_path.unlink()
+ 
+    if not is_complete():
+        raise RuntimeError(
+            "Data bundle was downloaded and extracted, but chroma_db/index "
+            "still look incomplete afterward - check the zip's internal "
+            "structure and DATA_BUNDLE_URL."
+        )
     return True
  
  
