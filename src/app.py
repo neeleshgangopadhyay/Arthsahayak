@@ -147,6 +147,32 @@ def ensure_data_present():
             zf.extractall(project_root)
     zip_path.unlink()
  
+    # Defensive normalization: in this environment some zip entries came out
+    # with a literal backslash in the stored name (e.g. "chroma_db\\chroma.
+    # sqlite3") rather than a real path separator - likely a quirk of how
+    # this particular zip was produced upstream. zipfile.extractall() on
+    # Linux doesn't treat "\" as a directory separator, so each such entry
+    # lands as one oddly-named flat file in project_root instead of inside a
+    # real subdirectory. Rebuild those into the proper nested paths rather
+    # than depending on the zip never doing this again.
+    for _item in list(project_root.iterdir()):
+        if not _item.is_file() or "\\" not in _item.name:
+            continue
+        if _item.name.endswith("\\"):
+            # A directory-marker entry (e.g. "index\cache\") rather than a
+            # real file - just create the real directory and drop the
+            # placeholder.
+            _dir_parts = [p for p in _item.name.split("\\") if p]
+            if _dir_parts:
+                project_root.joinpath(*_dir_parts).mkdir(parents=True, exist_ok=True)
+            _item.unlink()
+            print(f"[ensure_data_present] normalized dir marker {_item.name}", flush=True)
+            continue
+        _dest = project_root.joinpath(*_item.name.split("\\"))
+        _dest.parent.mkdir(parents=True, exist_ok=True)
+        _item.rename(_dest)
+        print(f"[ensure_data_present] normalized {_item.name} -> {_dest}", flush=True)
+ 
     print(
         f"[ensure_data_present] after extract: chroma_dir listing = "
         f"{list(chroma_dir.iterdir()) if chroma_dir.exists() else 'MISSING'}",
@@ -554,5 +580,4 @@ if pending:
 prompt = st.chat_input("Ask about the Indian economy...")
 if prompt:
     run_turn(prompt)
- 
  
