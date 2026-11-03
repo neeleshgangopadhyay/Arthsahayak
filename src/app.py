@@ -422,6 +422,19 @@ with st.sidebar:
                 st.write(f"&nbsp;&nbsp;- {_f.name}: {_size}")
         try:
             import chromadb as _chromadb
+            # chromadb caches its internal System object per path within a
+            # process (SharedSystemClient). If PersistentClient(path=...)
+            # was ever called earlier in this same long-lived process while
+            # chroma_db was still empty/broken (from an earlier failed
+            # deploy attempt before the data-path fix), every later call for
+            # the same path could keep returning that stale cached client
+            # regardless of what's actually on disk now. Clear it before
+            # testing to see if that's what's happening here.
+            try:
+                _chromadb.api.client.SharedSystemClient.clear_system_cache()
+                st.write("cleared chromadb SharedSystemClient cache")
+            except Exception as _ce:
+                st.write(f"could not clear chromadb cache: {_ce}")
             _client = _chromadb.PersistentClient(path=str(_chroma_dir))
             _cols = _client.list_collections()
             st.write(f"collections found: {[c.name for c in _cols]}")
