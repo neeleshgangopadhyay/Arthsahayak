@@ -15,7 +15,10 @@ same way it does there.)
 """
  
 import inspect
+import os
 import time
+import zipfile
+from pathlib import Path
  
 # Workaround for a known Streamlit/huggingface_hub interaction: Streamlit's
 # startup code calls inspect.stack() (to detect whether it's running in a
@@ -51,6 +54,71 @@ def _safe_getmodule(*args, **kwargs):
 inspect.getmodule = _safe_getmodule
  
 import streamlit as st
+ 
+# Streamlit Community Cloud has no .env file - it has no file of yours at
+# all except what's in the git repo. Credentials are configured through
+# its own "Secrets" dashboard instead, exposed to the app as st.secrets.
+# The rest of this codebase (llm_gateway.py, verifier.py, etc.) reads
+# credentials with plain os.getenv(...), expecting python-dotenv's
+# load_dotenv() to have already populated them from a local .env file.
+# Bridging any configured Streamlit secrets into os.environ here - before
+# agents.py (and everything it imports) ever runs - means that existing
+# code keeps working completely unchanged on both platforms: locally via
+# .env, and on Streamlit Cloud via its Secrets manager. st.secrets is
+# empty (not an error) when no secrets are configured, e.g. running
+# locally with only a .env file.
+try:
+    for _secret_key, _secret_value in st.secrets.items():
+        os.environ.setdefault(_secret_key, str(_secret_value))
+except Exception:
+    pass
+ 
+# Streamlit Cloud builds the app from a fresh git clone, which has no
+# chroma_db/ or index/ folder - both are gitignored because the main file
+# inside chroma_db (chroma.sqlite3) is 248MB, well past GitHub's 100MB
+# per-file commit limit. Rather than fight that with Git LFS (whose
+# support in Streamlit Cloud's clone step isn't something we could verify
+# ahead of time), that data is uploaded once as a GitHub Release asset
+# and downloaded here on first startup instead. st.cache_resource ensures
+# this runs once per deployed container - not once per visitor, and not
+# once per chat message - and it's a no-op entirely when running locally,
+# since the folders already exist there from the Step 1 ingestion run.
+DATA_BUNDLE_URL = (
+    "https://github.com/neeleshgangopadhyay/Arthsahayak/releases/"
+    "download/data-v1/arthsahayak_data.zip"
+)
+ 
+ 
+@st.cache_resource
+def ensure_data_present():
+    project_root = Path(__file__).resolve().parent.parent
+    chroma_dir = project_root / "chroma_db"
+    index_dir = project_root / "index"
+    if chroma_dir.exists() and index_dir.exists():
+        return True
+ 
+    import requests
+ 
+    zip_path = project_root / "_arthsahayak_data.zip"
+    # Only needed if the repo (and therefore its Release assets) is
+    # private - a public repo's release assets download with no auth at
+    # all, so this header is simply omitted when the secret isn't set.
+    token = os.environ.get("GITHUB_TOKEN")
+    headers = {"Authorization": f"Bearer {token}"} if token else {}
+ 
+    with st.spinner("First-time setup: downloading the document index (~210MB, once)..."):
+        with requests.get(DATA_BUNDLE_URL, headers=headers, stream=True, timeout=300) as resp:
+            resp.raise_for_status()
+            with open(zip_path, "wb") as f:
+                for chunk in resp.iter_content(chunk_size=1024 * 1024):
+                    f.write(chunk)
+        with zipfile.ZipFile(zip_path, "r") as zf:
+            zf.extractall(project_root)
+    zip_path.unlink()
+    return True
+ 
+ 
+ensure_data_present()
  
 from agents import build_agent
  
