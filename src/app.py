@@ -135,12 +135,28 @@ def ensure_data_present():
     with st.spinner("First-time setup: downloading the document index (~210MB, once)..."):
         with requests.get(DATA_BUNDLE_URL, headers=headers, stream=True, timeout=300) as resp:
             resp.raise_for_status()
+            total_bytes = 0
             with open(zip_path, "wb") as f:
                 for chunk in resp.iter_content(chunk_size=1024 * 1024):
                     f.write(chunk)
+                    total_bytes += len(chunk)
+            print(f"[ensure_data_present] downloaded {total_bytes} bytes to {zip_path}", flush=True)
         with zipfile.ZipFile(zip_path, "r") as zf:
+            names = zf.namelist()
+            print(f"[ensure_data_present] zip has {len(names)} entries; first 5: {names[:5]}", flush=True)
             zf.extractall(project_root)
     zip_path.unlink()
+ 
+    print(
+        f"[ensure_data_present] after extract: chroma_dir listing = "
+        f"{list(chroma_dir.iterdir()) if chroma_dir.exists() else 'MISSING'}",
+        flush=True,
+    )
+    print(
+        f"[ensure_data_present] after extract: index_dir listing = "
+        f"{list(index_dir.iterdir()) if index_dir.exists() else 'MISSING'}",
+        flush=True,
+    )
  
     if not is_complete():
         raise RuntimeError(
@@ -538,4 +554,5 @@ if pending:
 prompt = st.chat_input("Ask about the Indian economy...")
 if prompt:
     run_turn(prompt)
+ 
  
