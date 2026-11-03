@@ -319,6 +319,42 @@ with st.sidebar:
         st.session_state["history"] = []
         st.rerun()
  
+    # --- TEMPORARY DEBUG PANEL - remove once the deployment data-path issue
+    # is confirmed fixed. Shows exactly what's on disk and what chromadb
+    # actually sees, since "Collection [chunks_section] does not exist" could
+    # mean the download never happened, extracted into the wrong place, or
+    # extracted correctly but under a stale/incomplete leftover directory
+    # from an earlier failed deploy attempt (Streamlit Cloud appears to
+    # reuse the same container across redeploys - "Pulling code changes"
+    # rather than a fresh clone - so a bad folder from an earlier run could
+    # persist and short-circuit ensure_data_present()'s exists() check).
+    st.divider()
+    with st.expander("\U0001F527 Debug: data status", expanded=True):
+        _project_root = Path(__file__).resolve().parent.parent
+        _chroma_dir = _project_root / "chroma_db"
+        _index_dir = _project_root / "index"
+        st.write(f"chroma_dir: `{_chroma_dir}`")
+        st.write(f"chroma_dir exists: **{_chroma_dir.exists()}**")
+        if _chroma_dir.exists():
+            for _f in sorted(_chroma_dir.iterdir()):
+                _size = _f.stat().st_size if _f.is_file() else "dir"
+                st.write(f"&nbsp;&nbsp;- {_f.name}: {_size}")
+        st.write(f"index_dir: `{_index_dir}`")
+        st.write(f"index_dir exists: **{_index_dir.exists()}**")
+        if _index_dir.exists():
+            for _f in sorted(_index_dir.iterdir()):
+                _size = _f.stat().st_size if _f.is_file() else "dir"
+                st.write(f"&nbsp;&nbsp;- {_f.name}: {_size}")
+        try:
+            import chromadb as _chromadb
+            _client = _chromadb.PersistentClient(path=str(_chroma_dir))
+            _cols = _client.list_collections()
+            st.write(f"collections found: {[c.name for c in _cols]}")
+            for _c in _cols:
+                st.write(f"&nbsp;&nbsp;- {_c.name}: **{_c.count()}** items")
+        except Exception as _e:
+            st.write(f"chromadb error: {_e}")
+ 
 st.title("ArthSahayak")
 st.caption("Ask a question about the Indian economy.")
  
